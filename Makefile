@@ -1,2 +1,2 @@
-isomer: isomer.c
-	$(CC) isomer.c -o isomer -Wall -Wextra -pedantic -std=c99
+isomer: isomer.cc file.cc file.h
+	$(CXX) isomer.cc file.cc -o isomer -Wall -Wextra -pedantic
