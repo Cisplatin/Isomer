@@ -1,3 +1,7 @@
+# Development files
+*.swp
+.DS_STORE
+
 # Object files
 *.o
 *.ko
