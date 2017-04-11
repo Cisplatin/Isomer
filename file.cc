@@ -1,5 +1,4 @@
 #include <fstream>
-#include <iostream>
 #include <iterator>
 #include <stdexcept>
 #include <string>
@@ -11,16 +10,13 @@
 /* @param [argc] The number of arguments supplied to isomer
  * @param [argv] The arguments supplied to isomer
  * @return A new File object with the proper file's contents
- * @raise [invalid_argument] If too few or many arguments were given
+ * @raise [invalid_argument] If too many arguments were given
  */
 File::File(int argc, char * argv[]) {
-  if(argc == 1) {
-    // TODO: Support new files being created
-    throw std::invalid_argument("No file given.");
-  } else if(argc == 2) {
+  if(argc == 2) {
     this->filename = this->absolutePath(argv[1]);
     this->populateContents();
-  } else {
+  } else if(argc > 2) {
     // TODO: Support multiple files being created
     throw std::invalid_argument("Too many inputs given.");
   }
@@ -50,7 +46,7 @@ void File::populateContents() {
  * @return The absolute path of the given filename
  */
 std::string File::absolutePath(std::string filename) {
-  if(filename.at(0) == '/') {
+  if(filename.empty() || filename.at(0) == '/') {
     return filename;
   } else {
     char * cwd = (char *) malloc(FILENAME_MAX * sizeof(char));

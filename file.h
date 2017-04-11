@@ -1,3 +1,6 @@
+#ifndef FILE_H
+#define FILE_H
+
 #include <string>
 #include <vector>
 
@@ -13,3 +16,5 @@ class File {
 
     static std::string absolutePath(std::string);
 };
+
+#endif
