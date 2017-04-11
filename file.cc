@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <unistd.h>
 
 #include "file.h"
 
@@ -15,7 +16,7 @@ File::File(int argc, char * argv[]) {
     // TODO: Support new files being created
     throw std::invalid_argument("No file given.");
   } else if(argc == 2) {
-    this->populateContents(std::string(argv[0]));
+    this->populateContents(this->absolutePath(argv[1]));
   } else {
     // TODO: Support multiple files being created
     throw std::invalid_argument("Too many inputs given.");
@@ -27,4 +28,18 @@ File::File(int argc, char * argv[]) {
  */
 void File::populateContents(std::string filename) {
   this->filename = filename;
+  // TODO
+}
+
+/* @param [filename] The name of the file to get the absolute path of
+ * @return The absolute path of the given filename
+ */
+std::string File::absolutePath(std::string filename) {
+  if(filename.at(0) == '/') {
+    return filename;
+  } else {
+    char * cwd = (char *) malloc(FILENAME_MAX * sizeof(char));
+    getcwd(cwd, FILENAME_MAX);
+    return std::string(cwd) + '/' + filename;
+  }
 }
