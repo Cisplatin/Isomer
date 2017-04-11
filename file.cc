@@ -1,5 +1,6 @@
-#include <iostream>
 #include <fstream>
+#include <iostream>
+#include <iterator>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -35,9 +36,14 @@ bool File::fileExists() {
 /* @effect Sets the contents based on the filename
  */
 void File::populateContents() {
-  std::cout << "SET FILENAME TO " << this->filename << std::endl;
-  std::cout << "DOES FILE EXIST? " << this->fileExists() << std::endl;
-  // TODO
+  if(this->fileExists()) {
+    std::ifstream file(this->filename);
+    std::string line;
+
+    while(std::getline(file, line)) {
+      this->contents.push_back(line);
+    }
+  }
 }
 
 /* @param [filename] The name of the file to get the absolute path of
