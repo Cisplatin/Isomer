@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -16,18 +17,26 @@ File::File(int argc, char * argv[]) {
     // TODO: Support new files being created
     throw std::invalid_argument("No file given.");
   } else if(argc == 2) {
-    this->populateContents(this->absolutePath(argv[1]));
+    this->filename = this->absolutePath(argv[1]);
+    this->populateContents();
   } else {
     // TODO: Support multiple files being created
     throw std::invalid_argument("Too many inputs given.");
   }
 }
 
-/* @param [filename] The name of the file to read contents from
- * @effect Sets the contents and filename of the File object
+/* @return True if the filename as-is exists, otherwise False
  */
-void File::populateContents(std::string filename) {
-  this->filename = filename;
+bool File::fileExists() {
+  std::ifstream file(this->filename.c_str());
+  return file.good();
+}
+
+/* @effect Sets the contents based on the filename
+ */
+void File::populateContents() {
+  std::cout << "SET FILENAME TO " << this->filename << std::endl;
+  std::cout << "DOES FILE EXIST? " << this->fileExists() << std::endl;
   // TODO
 }
 

@@ -1,6 +1,7 @@
 # Development files
 *.swp
 .DS_STORE
+isomer
 
 # Object files
 *.o

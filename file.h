@@ -8,6 +8,8 @@ class File {
     std::string filename;
     std::vector<std::string> contents;
 
-    void populateContents(std::string);
-    std::string absolutePath(std::string);
+    bool fileExists();
+    void populateContents();
+
+    static std::string absolutePath(std::string);
 };
